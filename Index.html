@@ -1,0 +1,598 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abu Thahir | Freelancer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#050816;
+      --card:rgba(10, 18, 40, 0.64);
+      --card-soft:rgba(255,255,255,0.05);
+      --text:#eef3ff;
+      --muted:#a8b3d1;
+      --line:rgba(255,255,255,0.10);
+      --accent:#7c8cff;
+      --accent2:#7ef0c7;
+      --shadow:0 24px 80px rgba(0,0,0,.35);
+      --radius:28px;
+    }*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at top left, rgba(124,140,255,.16), transparent 28%),
+    radial-gradient(circle at 86% 16%, rgba(126,240,199,.12), transparent 22%),
+    linear-gradient(180deg, #050816 0%, #071022 100%);
+}
+
+.intro{
+  position:fixed; inset:0; z-index:1000; display:grid; place-items:center;
+  background:linear-gradient(135deg, #040712 0%, #071022 45%, #0a1430 100%);
+  transition:opacity .9s ease, visibility .9s ease;
+}
+.intro.hide{opacity:0; visibility:hidden; pointer-events:none}
+.intro-card{
+  width:min(92vw, 740px); padding:32px; border:1px solid rgba(255,255,255,.12);
+  border-radius:32px; background:rgba(8,13,30,.5); backdrop-filter:blur(18px);
+  box-shadow:var(--shadow); position:relative; overflow:hidden;
+}
+.intro-card::before{
+  content:""; position:absolute; inset:-2px;
+  background:linear-gradient(120deg, transparent 0%, rgba(124,140,255,.20) 50%, transparent 100%);
+  transform:translateX(-70%); animation:shine 2.6s ease-in-out infinite;
+}
+@keyframes shine{50%{transform:translateX(70%)}}
+.intro-top{display:flex;align-items:center;gap:12px;margin-bottom:16px;position:relative;z-index:1}
+.dot{width:11px;height:11px;border-radius:999px;background:var(--accent2);box-shadow:0 0 20px rgba(126,240,199,.55)}
+.intro h1{margin:0;font-size:clamp(2rem,5vw,4.25rem);line-height:1.02;letter-spacing:-.04em;position:relative;z-index:1}
+.intro p{margin:14px 0 0;color:var(--muted);max-width:58ch;position:relative;z-index:1}
+.intro-bar{height:7px;margin-top:26px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;position:relative;z-index:1}
+.intro-bar span{display:block;width:40%;height:100%;border-radius:999px;background:linear-gradient(90deg, var(--accent), var(--accent2));animation:load 1.5s ease-in-out infinite}
+@keyframes load{0%{transform:translateX(-20%)}50%{transform:translateX(160%)}100%{transform:translateX(-20%)}}
+
+.orb{position:fixed;border-radius:50%;filter:blur(10px);pointer-events:none;z-index:0;opacity:.9;animation:float 10s ease-in-out infinite}
+.orb.one{width:220px;height:220px;left:-60px;top:12%;background:radial-gradient(circle, rgba(124,140,255,.35), rgba(124,140,255,0) 68%)}
+.orb.two{width:280px;height:280px;right:-80px;top:40%;background:radial-gradient(circle, rgba(126,240,199,.25), rgba(126,240,199,0) 68%);animation-duration:13s}
+.orb.three{width:160px;height:160px;left:15%;bottom:6%;background:radial-gradient(circle, rgba(167,104,255,.22), rgba(167,104,255,0) 68%);animation-duration:11s}
+@keyframes float{50%{transform:translateY(-18px) translateX(8px) scale(1.04)}}
+
+.cursor-glow{position:fixed;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle, rgba(124,140,255,.10) 0%, rgba(124,140,255,0) 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;opacity:.8}
+
+.wrap{position:relative;z-index:1;width:min(1180px,92vw);margin:0 auto}
+
+nav{
+  position:sticky;top:0;z-index:20;
+  width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+  backdrop-filter:blur(16px);
+  background:linear-gradient(180deg, rgba(5,8,22,.90), rgba(5,8,22,.62));
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.14);
+}
+.nav-inner{
+  width:min(1180px,92vw); margin:0 auto; padding:18px 0;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.02em}
+.brand .logo{width:38px;height:38px;border-radius:14px;object-fit:cover;box-shadow:0 12px 30px rgba(124,140,255,.25);border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05)}
+.nav-links{display:flex;gap:22px;flex-wrap:wrap}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.95rem;font-weight:500;transition:.25s ease}
+.nav-links a:hover{color:var(--text);transform:translateY(-1px)}
+
+.hero{min-height:calc(100vh - 84px);display:grid;grid-template-columns:1.08fr .92fr;gap:32px;align-items:center;padding:30px 0 70px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:999px;color:var(--muted);font-size:.92rem}
+.eyebrow .live{width:8px;height:8px;border-radius:50%;background:#72f6a5;box-shadow:0 0 0 0 rgba(114,246,165,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 14px rgba(114,246,165,0)}}
+h2.hero-title{margin:18px 0 14px;font-size:clamp(2.6rem,7vw,5.8rem);line-height:1;letter-spacing:-.06em}
+.hero-title .grad{background:linear-gradient(90deg, #ffffff 0%, #a8b3d1 30%, #7c8cff 70%, #7ef0c7 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.type-line{font-size:clamp(1.05rem,1.8vw,1.2rem);color:var(--muted);min-height:1.7em;margin-bottom:22px}
+.hero-copy{max-width:62ch;color:#c6d0ed;line-height:1.78;font-size:1rem}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:16px;text-decoration:none;font-weight:600;border:1px solid transparent;transition:.25s ease;cursor:pointer}
+.btn.primary{color:#071022;background:linear-gradient(90deg, var(--accent2), #b8ffd5);box-shadow:0 18px 40px rgba(126,240,199,.18)}
+.btn.secondary{color:var(--text);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
+.btn:hover{transform:translateY(-2px) scale(1.01)}
+
+.hero-card{position:relative;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.10);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);overflow:hidden;min-height:520px;backdrop-filter:blur(14px)}
+.glass-strip{position:absolute;inset:18px 18px auto auto;width:130px;height:130px;border-radius:28px;background:linear-gradient(135deg, rgba(126,240,199,.2), rgba(124,140,255,.08));transform:rotate(10deg);opacity:.8}
+.profile{position:relative;border-radius:22px;border:1px solid rgba(255,255,255,.10);background:rgba(5,8,22,.45);padding:20px;overflow:hidden}
+.avatar{width:100%;height:240px;border-radius:20px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 22%),linear-gradient(135deg, rgba(124,140,255,.3), rgba(126,240,199,.14)),url('hero-photo.jpg') center/cover no-repeat;position:relative;overflow:hidden}
+.avatar::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, transparent 20%, rgba(5,8,22,.25) 100%)}
+.profile-meta{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;margin-top:18px}
+.profile-meta h3{margin:0;font-size:1.25rem}
+.profile-meta p{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+.mini-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.badge{padding:10px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#dce4ff;font-size:.88rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.stat{padding:16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-align:center}
+.stat strong{display:block;font-size:1.45rem}
+.stat span{color:var(--muted);font-size:.88rem}
+
+section{padding:24px 0 72px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:18px}
+.section-head h3{margin:0;font-size:clamp(1.5rem,3vw,2.2rem)}
+.section-head p{margin:0;color:var(--muted);max-width:62ch;line-height:1.7}
+
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 4;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 16px 40px rgba(0,0,0,.18);transition:transform .25s ease, border-color .25s ease, background .25s ease;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.card::before{content:"";position:absolute;inset:auto -40% -50% auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle, rgba(124,140,255,.12), transparent 70%);transition:transform .35s ease}
+.card:hover{transform:translateY(-6px);border-color:rgba(126,240,199,.24)}
+.card:hover::before{transform:scale(1.1)}
+.icon{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(124,140,255,.20), rgba(126,240,199,.18));border:1px solid rgba(255,255,255,.08);font-size:1.4rem;margin-bottom:16px}
+.card h4{margin:0 0 8px;font-size:1.2rem}
+.card p{margin:0;color:var(--muted);line-height:1.75}
+
+.project-card{grid-column:span 6;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)),radial-gradient(circle at top right, rgba(126,240,199,.18), transparent 35%)}
+.project-top{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.project-top .tag{font-size:.8rem;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.meter{margin-top:18px;height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.meter span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg, var(--accent), var(--accent2));width:0}
+
+.contact-box{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;background:linear-gradient(135deg, rgba(124,140,255,.14), rgba(126,240,199,.08));border:1px solid rgba(255,255,255,.10);border-radius:28px;padding:26px}
+.contact-box h3{margin:0 0 8px;font-size:1.8rem}
+.contact-box p{margin:0;color:var(--muted);max-width:62ch;line-height:1.7}
+.socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+footer{padding:18px 0 40px;color:var(--muted);text-align:center}
+.reveal{opacity:0;transform:translateY(22px);transition:all .7s ease}
+.reveal.show{opacity:1;transform:none}
+
+.modal{position:fixed; inset:0; z-index:2000; display:none; align-items:center; justify-content:center; background:rgba(3,7,18,.72); backdrop-filter:blur(10px); padding:18px}
+.modal.show{display:flex}
+.modal-card{width:min(920px, 96vw);max-height:min(90vh, 920px);overflow:auto;background:linear-gradient(180deg, rgba(10,18,40,.98), rgba(6,10,22,.98));border:1px solid rgba(255,255,255,.12);border-radius:28px;box-shadow:0 30px 100px rgba(0,0,0,.45);padding:22px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
+.modal-title{margin:0;font-size:1.4rem}
+.close-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);color:var(--text);width:42px;height:42px;border-radius:14px;cursor:pointer;font-size:1.2rem}
+.preview-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.preview-panel{border:1px solid rgba(255,255,255,.10);border-radius:22px;background:rgba(255,255,255,.04);padding:18px}
+.mock-screen{min-height:340px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.08);padding:18px;display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.mock-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mock-pill{padding:8px 12px;border-radius:999px;background:rgba(126,240,199,.14);border:1px solid rgba(126,240,199,.18);color:#dffdf1;font-size:.85rem}
+.mock-title{font-size:1.5rem;font-weight:700;line-height:1.15;margin:2px 0 0}
+.mock-desc{color:var(--muted);line-height:1.65;margin:0}
+.mock-box{padding:14px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field,.textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);color:var(--text);border-radius:16px;padding:14px 15px;font:inherit;outline:none}
+.textarea{min-height:120px;resize:vertical}
+.field::placeholder,.textarea::placeholder{color:#95a1c4}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.tiny{font-size:.88rem;color:var(--muted);line-height:1.55}
+
+.profile-preview{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center}
+.preview-photo{width:92px;height:92px;border-radius:26px;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 26px rgba(0,0,0,.25)}
+
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:22px}
+  .hero-card{min-height:auto}
+  .card{grid-column:span 6}
+  .project-card{grid-column:span 12}
+  .preview-grid{grid-template-columns:1fr}
+}
+@media (max-width: 680px){
+  .nav-inner{flex-direction:column;align-items:flex-start}
+  .nav-links{gap:14px}
+  .card,.project-card{grid-column:span 12}
+  .stats{grid-template-columns:1fr}
+  .contact-box{grid-template-columns:1fr}
+  .intro-card{padding:22px}
+  .form-row{grid-template-columns:1fr}
+  .profile-preview{grid-template-columns:74px 1fr}
+  .preview-photo{width:74px;height:74px;border-radius:22px}
+}
+
+  </style>
+</head>
+<body>
+  <div class="intro" id="intro">
+    <div class="intro-card">
+      <div class="intro-top"><span class="dot"></span><span>Loading your digital presence</span></div>
+      <h1>Discover.</h1>
+      <p>let’s bring your ideas to life with clean, impactful design.</p>
+      <div class="intro-bar"><span></span></div>
+    </div>
+  </div>  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>  <div class="wrap">
+    <nav>
+      <div class="nav-inner">
+        <div class="brand">
+          <img class="logo" src="logo.png" alt="Abu Thahir logo">
+          <span>Abu Thahir</span>
+        </div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav><main class="hero">
+  <div class="hero-copy-area reveal">
+    <div class="eyebrow"><span class="live"></span> Available for freelance work</div>
+    <h2 class="hero-title"><span class="grad">I design posters</span><br>that sell the idea fast.</h2>
+    <div class="type-line"><span id="typed"></span></div>
+    <p class="hero-copy">
+      Need a poster, flyer, or graphic that grabs attention instantly? I create bold, polished, and client-ready visuals for events, brands, promos, and social media.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#contact">Hire Me</a>
+    </div>
+  </div>
+
+  <aside class="hero-card reveal">
+<div class="glass-strip"></div>
+<div class="profile">
+  <div class="avatar"></div>
+  <div class="profile-meta">
+    <div>
+      <h3>Abu Thahir</h3>
+      <p>Student • Graphic Designer • Freelancer</p>
+    </div>
+    <div style="text-align:right;color:var(--accent2);font-weight:600">● Online</div>
+  </div>
+  <p style="margin:16px 0 0;color:var(--muted);line-height:1.75">
+    I’m Abu Thahir, a college student from Kerala who loves design, clean visuals, and building a strong personal brand online.
+    I study while growing my freelance work in poster and flyer design.
+  </p>
+  <div class="mini-badges">
+    <div class="badge">From Kerala</div>
+    <div class="badge">Studies CSE</div>
+    <div class="badge">Likes design</div>
+    <div class="badge">Freelance work</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong>Student</strong><span>Current focus</span></div>
+    <div class="stat"><strong>Designer</strong><span>Creative role</span></div>
+    <div class="stat"><strong>Freelancer</strong><span>Work mode</span></div>
+  </div>
+</div>
+
+  </aside>
+    </main><section id="about">
+  <div class="section-head reveal">
+    <div>
+      <h3>About this gig</h3>
+      <p>Need a professional poster, flyer, or graphic that grabs attention instantly? This gig is built for clients who want clean, bold, high-impact visuals.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article class="card reveal">
+      <div class="icon">✦</div>
+      <h4>Strong first impression</h4>
+      <p>Your design should stop the scroll, communicate fast, and feel polished from the first glance.</p>
+    </article>
+    <article class="card reveal">
+      <div class="icon">⚡</div>
+      <h4>Clean layout</h4>
+      <p>Balanced spacing, clear hierarchy, and a premium look that makes the message easy to read.</p>
+    </article>
+    <article class="card reveal">
+      <div class="icon">◌</div>
+      <h4>Built for clients</h4>
+      <p>Every section is written to help buyers understand the value quickly and trust the service faster.</p>
+    </article>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-head reveal">
+    <div>
+      <h3>What you get</h3>
+      <p>Clear deliverables, clean visuals, and a style that fits your event, brand, or project.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article class="card reveal">
+      <div class="icon">🖼</div>
+      <h4>Professional poster design</h4>
+      <p>Eye-catching layouts that highlight your message and look polished across platforms.</p>
+    </article>
+    <article class="card reveal">
+      <div class="icon">⬇</div>
+      <h4>High-resolution export</h4>
+      <p>Delivered in crisp JPG or PNG format with a clean finish for digital use.</p>
+    </article>
+    <article class="card reveal">
+      <div class="icon">🖨</div>
+      <h4>Print-ready output</h4>
+      <p>Prepared for print or online sharing, depending on what your project needs.</p>
+    </article>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-head reveal">
+    <div>
+      <h3>Featured gig</h3>
+      <p>This section is written to help buyers understand the service quickly and see what they are getting.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article class="card project-card reveal">
+      <div>
+        <div class="project-top">
+          <h4 style="margin:0;font-size:1.35rem">Bold poster & flyer visuals</h4>
+          <span class="tag">Legit design</span>
+        </div>
+        <p style="margin-top:12px">Made to promote events, brands, products, and social content with a strong visual punch.</p>
+      </div>
+      <div class="meter"><span data-fill="92%"></span></div>
+    </article>
+
+    <article class="card project-card reveal">
+      <div>
+        <div class="project-top">
+          <h4 style="margin:0;font-size:1.35rem">Client-focused presentation</h4>
+          <span class="tag">Trust-building</span>
+        </div>
+        <p style="margin-top:12px">A sharp portfolio style that makes the offer easy to understand and easy to contact.</p>
+      </div>
+      <div class="meter"><span data-fill="94%"></span></div>
+    </article>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box reveal">
+    <div>
+      <h3>Ready to start your design?</h3>
+      <p>Choose the easiest way to contact me and connect fast.</p>
+      <div class="socials">
+        <button class="btn secondary contact-open" data-target="fiverr">Fiverr</button>
+        <button class="btn secondary contact-open" data-target="instagram">Instagram</button>
+        <button class="btn secondary contact-open" data-target="linkedin">LinkedIn</button>
+        <button class="btn secondary contact-open" data-target="email">Email Me</button>
+      </div>
+      <p class="tiny" style="margin-top:14px">Email: abuthahir98675@gmail.com</p>
+    </div>
+    <a class="btn primary" href="#contact">Hire Me</a>
+  </div>
+</section>
+
+<footer>Graphic Designer • Freelancer</footer>
+
+  </div>  <div class="modal" id="contactModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 class="modal-title" id="modalTitle">Preview</h3>
+        <button class="close-btn" id="closeModal" aria-label="Close">×</button>
+      </div>
+      <div class="preview-grid">
+        <div class="preview-panel">
+          <div class="mock-screen" id="mockScreen"></div>
+        </div>
+        <div class="preview-panel" id="modalSide"></div>
+      </div>
+    </div>
+  </div>  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('intro').classList.add('hide'), 1800);
+    });
+
+    const words = [
+      'Built for clients who want attention.',
+      'Clean visuals with a premium feel.',
+      'Fast, bold, and easy to trust.'
+    ];
+    const typedEl = document.getElementById('typed');
+    let wordIndex = 0, charIndex = 0, deleting = false;
+    function typeLoop(){
+      const current = words[wordIndex];
+      typedEl.textContent = current.slice(0, charIndex);
+      if(!deleting){
+        charIndex++;
+        if(charIndex > current.length + 16) deleting = true;
+      } else {
+        charIndex--;
+        if(charIndex <= 0){
+          deleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+        }
+      }
+      setTimeout(typeLoop, deleting ? 28 : 46);
+    }
+    typeLoop();
+
+    const glow = document.getElementById('cursorGlow');
+    window.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+
+    const meters = document.querySelectorAll('.meter span');
+    const meterIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.style.width = entry.target.getAttribute('data-fill');
+        }
+      });
+    }, { threshold: 0.4 });
+    meters.forEach(m => meterIO.observe(m));
+
+    const heroCard = document.querySelector('.hero-card');
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      heroCard.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+    window.addEventListener('mouseleave', () => { heroCard.style.transform = 'none'; });
+
+    const modal = document.getElementById('contactModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const mockScreen = document.getElementById('mockScreen');
+    const modalSide = document.getElementById('modalSide');
+    const closeModal = document.getElementById('closeModal');
+
+    const data = {
+      fiverr: {
+        title: 'Fiverr Preview',
+        screen: `
+          <div class="mock-top">
+            <span class="mock-pill">Fiverr</span>
+            <span style="color:var(--muted);font-size:.88rem">Professional gig</span>
+          </div>
+          <div class="profile-preview">
+            <div class="preview-photo" style="background-image:url('logo.png');"></div>
+            <div>
+              <div class="mock-title" style="font-size:1.15rem">Poster & Flyer Designer</div>
+              <p class="mock-desc">A clean, brand-friendly design to help people understand your bussiness fast.</p>
+            </div>
+          </div>
+          <div class="mock-box">
+            <strong>Buyer gets</strong>
+            <ul style="margin:10px 0 0 18px;color:var(--muted);line-height:1.7">
+              <li>Professional poster design</li>
+              <li>High-resolution JPG/PNG</li>
+              <li>Print-ready output</li>
+              <li>Clear communication</li>
+            </ul>
+          </div>
+        `,
+        side: `
+          <h4 style="margin:0 0 10px">Why this gig works</h4>
+          <p class="tiny">It is simple, direct, and made for who want strong visuals without confusion.</p>
+          <div class="mock-box" style="margin-top:14px">
+            <strong>Best for</strong>
+            <p class="tiny">Events, promotions, business graphics, social posts, and custom designs.</p>
+          </div>
+          <div class="modal-actions">
+            <a class="btn primary" href="http://www.fiverr.com/s/42yGlGG" target="_blank" rel="noopener noreferrer">Open Fiverr</a>
+          </div>
+        `
+      },
+      instagram: {
+        title: 'Instagram Preview',
+        screen: `
+          <div class="mock-top">
+            <span class="mock-pill">Instagram</span>
+            <span style="color:var(--muted);font-size:.88rem">@abu._thahirr</span>
+          </div>
+          <div class="profile-preview">
+            <div class="preview-photo" style="background-image:url('instagram-photo.jpg');"></div>
+            <div>
+              <div class="mock-title" style="font-size:1.15rem">Abu Thahir</div>
+              <p class="mock-desc">A refined preview of the designer behind the work, giving clients a clearer sense of style and identity.</p>
+            </div>
+          </div>
+          <div class="mock-box">
+            <strong>Skills : </strong>
+            <p class="tiny" style="margin-top:8px">Creative, modern, and clean.</p>
+          </div>
+        `,
+        side: `
+          <h4 style="margin:0 0 10px">Instagram profile</h4>
+          <p class="tiny">Browse my Instagram for additional work and connect with me directly for inquiries.</p>
+          <div class="modal-actions">
+            <a class="btn primary" href="https://www.instagram.com/abu._thahirr?igsh=ZWZ2Z2ZwZzg0Ync0" target="_blank" rel="noopener noreferrer">Open Instagram</a>
+          </div>
+        `
+      },
+      linkedin: {
+        title: 'LinkedIn Preview',
+        screen: `
+          <div class="mock-top">
+            <span class="mock-pill">LinkedIn</span>
+            <span style="color:var(--muted);font-size:.88rem">Professional profile</span>
+          </div>
+          <div class="profile-preview">
+            <div class="preview-photo" style="background-image:url('linkedin-photo.jpg');"></div>
+            <div>
+              <div class="mock-title" style="font-size:1.15rem">Abu T</div>
+              <p class="mock-desc">Connect with me on LinkedIn for professional inquiries, collaborations, and project discussions</p>
+            </div>
+          </div>
+          <div class="mock-box">
+            <strong>Linkedin</strong>
+            <p class="tiny" style="margin-top:8px">LinkedIn is a professional network used to showcase skills, connect with others, and build credible opportunities</p>
+          </div>
+        `,
+        side: `
+          <h4 style="margin:0 0 10px">LinkedIn profile</h4>
+          <p class="tiny">Connect with me on LinkedIn for professional inquiries, collaborations, and project discussions</p>
+          <div class="modal-actions">
+            <a class="btn primary" href="https://www.linkedin.com/in/checkout-abuthahir?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Open LinkedIn</a>
+          </div>
+        `
+      },
+      email: {
+        title: 'Message Me',
+        screen: `
+          <div class="mock-top">
+            <span class="mock-pill">Email</span>
+            <span style="color:var(--muted);font-size:.88rem">abuthahir98675@gmail.com</span>
+          </div>
+          <div class="mock-box">
+            <strong>Message form</strong>
+            <p class="tiny" style="margin-top:8px">Send a short note about your project, deadline, and the style you need.</p>
+          </div>
+          <form id="emailForm" style="display:grid;gap:12px;margin-top:6px">
+            <div class="form-row">
+              <input class="field" type="text" id="senderName" placeholder="Your name" required>
+              <input class="field" type="email" id="senderEmail" placeholder="Your email" required>
+            </div>
+            <input class="field" type="text" id="subject" placeholder="Subject" required>
+            <textarea class="textarea" id="messageBody" placeholder="Tell me about your project..." required></textarea><div class="modal-actions">
+          <button class="btn primary" type="submit">Prepare Email</button>
+        </div>
+      </form>
+    `,
+    side: `
+      <h4 style="margin:0 0 10px">Quick contact</h4>
+      <p class="tiny">This opens your mail app with a clean draft so you can send it right away.</p>
+      <div class="mock-box" style="margin-top:14px">
+        <strong>Direct email</strong>
+        <p class="tiny">abuthahir98675@gmail.com</p>
+      </div>
+    `
+  }
+};
+
+function openModal(type){
+  const item = data[type];
+  if(!item) return;
+  modalTitle.textContent = item.title;
+  mockScreen.innerHTML = item.screen;
+  modalSide.innerHTML = item.side;
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+
+  const form = document.getElementById('emailForm');
+  if(form){
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value.trim();
+      const email = document.getElementById('senderEmail').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('messageBody').value.trim();
+      const mailto = `mailto:abuthahir98675@gmail.com?subject=${encodeURIComponent(subject + ' - from ' + name)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
+      window.location.href = mailto;
+    }, { once:true });
+  }
+}
+
+document.querySelectorAll('.contact-open').forEach(btn => {
+  btn.addEventListener('click', () => openModal(btn.dataset.target));
+});
+
+function close(){
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden','true');
+}
+closeModal.addEventListener('click', close);
+modal.addEventListener('click', (e) => { if(e.target === modal) close(); });
+window.addEventListener('keydown', (e) => { if(e.key === 'Escape') close(); });
+
+  </script>
+</body>
+</html>
